@@ -4,7 +4,8 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
+
 
 class FlickVideoPlayer extends StatefulWidget {
   const FlickVideoPlayer({
@@ -86,7 +87,7 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
     _setPreferredOrientation();
 
     if (widget.wakelockEnabled) {
-      Wakelock.enable();
+      WakelockPlus.enable();
     }
 
     if (kIsWeb) {
@@ -102,7 +103,7 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
   void dispose() {
     flickManager.flickControlManager!.removeListener(listener);
     if (widget.wakelockEnabled) {
-      Wakelock.disable();
+      WakelockPlus.disable();
     }
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -131,8 +132,8 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
   _switchToFullscreen() {
     if (widget.wakelockEnabledFullscreen) {
       /// Disable previous wakelock setting.
-      Wakelock.disable();
-      Wakelock.enable();
+      WakelockPlus.disable();
+      WakelockPlus.enable();
     }
 
     _isFullscreen = true;
@@ -163,8 +164,8 @@ class _FlickVideoPlayerState extends State<FlickVideoPlayer>
   _exitFullscreen() {
     if (widget.wakelockEnabled) {
       /// Disable previous wakelock setting.
-      Wakelock.disable();
-      Wakelock.enable();
+      WakelockPlus.disable();
+      WakelockPlus.enable();
     }
 
     _isFullscreen = false;
